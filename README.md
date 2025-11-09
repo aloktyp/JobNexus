@@ -9,7 +9,7 @@
 
 **✨ Connects Companies & Talent ✨**
 
-[Live Demo](#) | [Documentation](./DEPLOYMENT_GUIDE.md) | [Setup Guide](./SETUP_GUIDE.md)
+🌐 **[Live Demo](https://jobnexus-frontend.onrender.com)** | 🔗 **[Backend API](https://jobnexus-backend-8dll.onrender.com)**
 
 </div>
 
@@ -119,19 +119,16 @@ JobNexus is a full-stack job portal application that connects talented professio
 
 5. **Open** http://localhost:5173
 
-📖 **For detailed setup instructions, see [SETUP_GUIDE.md](./SETUP_GUIDE.md)**
-
 ---
 
-## 📦 Deployment
+## 🌐 Live Deployment
 
-Ready to deploy? Follow our comprehensive deployment guide:
+The application is deployed and live:
 
-👉 **[DEPLOYMENT_GUIDE.md](./DEPLOYMENT_GUIDE.md)**
+- **Frontend**: [https://jobnexus-frontend.onrender.com](https://jobnexus-frontend.onrender.com)
+- **Backend API**: [https://jobnexus-backend-8dll.onrender.com](https://jobnexus-backend-8dll.onrender.com)
 
-- Deploy backend on **Render**
-- Deploy frontend on **Vercel**
-- Step-by-step instructions with screenshots
+Both frontend and backend are hosted on **Render**.
 
 ---
 
@@ -251,8 +248,7 @@ This project is open source and available under the [MIT License](LICENSE).
 
 If you have any questions or need help, please:
 - Open an issue on GitHub
-- Check the [Setup Guide](./SETUP_GUIDE.md)
-- Check the [Deployment Guide](./DEPLOYMENT_GUIDE.md)
+- Visit the live demo: [JobNexus](https://jobnexus-frontend.onrender.com)
 
 ---
 

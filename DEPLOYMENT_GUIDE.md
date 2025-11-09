@@ -273,4 +273,4 @@ If you encounter issues:
 
 ---
 
-**Made with ❤️ by JobNexus Team**
+**Made with ❤️ by Alok**

@@ -258,7 +258,7 @@ If you have any questions or need help, please:
 
 <div align="center">
 
-**Made with ❤️ by JobNexus Team**
+**Made with ❤️ by Alok**
 
 ⭐ Star this repo if you find it helpful!
 

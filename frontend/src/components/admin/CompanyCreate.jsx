@@ -16,6 +16,11 @@ const CompanyCreate = () => {
     const dispatch = useDispatch();
     const registerNewCompany = async () => {
         try {
+            if (!companyName || companyName.trim() === '') {
+                toast.error('Please enter a company name');
+                return;
+            }
+            
             const res = await axios.post(`${COMPANY_API_END_POINT}/register`, {companyName}, {
                 headers:{
                     'Content-Type':'application/json'
@@ -30,6 +35,7 @@ const CompanyCreate = () => {
             }
         } catch (error) {
             console.log(error);
+            toast.error(error.response?.data?.message || 'Failed to register company');
         }
     }
     return (

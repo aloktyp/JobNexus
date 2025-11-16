@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import Navbar from './shared/Navbar'
-import axios from 'axios'
+import api from '@/utils/axios'
 import { USER_API_END_POINT } from '@/utils/constant'
 import { toast } from 'sonner'
 import { Loader2, Bookmark } from 'lucide-react'
@@ -16,9 +16,7 @@ const SavedJobs = () => {
 
     const fetchSavedJobs = async () => {
         try {
-            const res = await axios.get(`${USER_API_END_POINT}/saved`, {
-                withCredentials: true
-            });
+            const res = await api.get(`${USER_API_END_POINT}/saved`);
             if (res.data.success) {
                 setSavedJobs(res.data.savedJobs);
             }
@@ -36,9 +34,7 @@ const SavedJobs = () => {
 
     const handleUnsaveJob = async (jobId) => {
         try {
-            const res = await axios.post(`${USER_API_END_POINT}/unsave/${jobId}`, {}, {
-                withCredentials: true
-            });
+            const res = await api.post(`${USER_API_END_POINT}/unsave/${jobId}`, {});
 
             if (res.data.success) {
                 // Remove the job from the list immediately

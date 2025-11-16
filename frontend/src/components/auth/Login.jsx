@@ -40,6 +40,9 @@ const Login = () => {
                 // Store token in localStorage as fallback
                 if (res.data.token) {
                     localStorage.setItem('token', res.data.token);
+                    console.log('Token stored in localStorage:', res.data.token.substring(0, 20) + '...');
+                } else {
+                    console.warn('No token received in login response');
                 }
                 dispatch(setUser(res.data.user));
                 navigate("/");

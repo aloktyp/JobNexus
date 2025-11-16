@@ -7,6 +7,7 @@ import { Badge } from './ui/badge'
 import { Label } from './ui/label'
 import AppliedJobTable from './AppliedJobTable'
 import UpdateProfileDialog from './UpdateProfileDialog'
+import AuthTest from './AuthTest'
 import { useSelector } from 'react-redux'
 import useGetAppliedJobs from '@/hooks/useGetAppliedJobs'
 
@@ -21,6 +22,7 @@ const Profile = () => {
     return (
         <div>
             <Navbar />
+            <AuthTest />
             <div className='max-w-4xl mx-auto bg-white border border-gray-200 rounded-2xl my-5 p-8 shadow-lg'>
                 <div className='flex justify-between'>
                     <div className='flex items-center gap-4'>

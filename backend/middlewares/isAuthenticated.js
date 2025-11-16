@@ -13,9 +13,15 @@ const isAuthenticated = async (req, res, next) => {
         }
         
         if (!token) {
+            console.log("=== AUTHENTICATION DEBUG ===");
             console.log("No token found in cookies or Authorization header");
             console.log("Cookies:", req.cookies);
             console.log("Authorization header:", req.headers.authorization);
+            console.log("All headers:", req.headers);
+            console.log("Request origin:", req.headers.origin);
+            console.log("Request method:", req.method);
+            console.log("Request URL:", req.url);
+            console.log("=== END DEBUG ===");
             return res.status(401).json({
                 message: "User not authenticated - No token provided",
                 success: false,

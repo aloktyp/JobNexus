@@ -75,54 +75,59 @@ const SavedJobs = () => {
                     ) : (
                         <div className='grid grid-cols-3 gap-4'>
                             {
-                                savedJobs.map((job) => (
-                                    <div key={job._id} className='p-5 rounded-md shadow-xl bg-white border border-gray-100'>
-                                        <div className='flex items-center justify-between'>
-                                            <p className='text-sm text-gray-500'>
-                                                {daysAgoFunction(job?.createdAt) === 0 ? "Today" : `${daysAgoFunction(job?.createdAt)} days ago`}
-                                            </p>
-                                            <Button 
-                                                variant="outline" 
-                                                className="rounded-full" 
-                                                size="icon"
-                                                onClick={() => handleUnsaveJob(job._id)}
-                                            >
-                                                <Bookmark fill="currentColor" />
-                                            </Button>
-                                        </div>
+                                savedJobs.map((job) => {
+                                    // Skip rendering if job or company data is missing
+                                    if (!job || !job._id) return null;
+                                    
+                                    return (
+                                        <div key={job._id} className='p-5 rounded-md shadow-xl bg-white border border-gray-100'>
+                                            <div className='flex items-center justify-between'>
+                                                <p className='text-sm text-gray-500'>
+                                                    {daysAgoFunction(job?.createdAt) === 0 ? "Today" : `${daysAgoFunction(job?.createdAt)} days ago`}
+                                                </p>
+                                                <Button 
+                                                    variant="outline" 
+                                                    className="rounded-full" 
+                                                    size="icon"
+                                                    onClick={() => handleUnsaveJob(job._id)}
+                                                >
+                                                    <Bookmark fill="currentColor" />
+                                                </Button>
+                                            </div>
 
-                                        <div className='flex items-center gap-2 my-2'>
-                                            <Button className="p-6" variant="outline" size="icon">
-                                                <Avatar>
-                                                    <AvatarImage src={job?.company?.logo} />
-                                                </Avatar>
-                                            </Button>
+                                            <div className='flex items-center gap-2 my-2'>
+                                                <Button className="p-6" variant="outline" size="icon">
+                                                    <Avatar>
+                                                        <AvatarImage src={job?.company?.logo} />
+                                                    </Avatar>
+                                                </Button>
+                                                <div>
+                                                    <h1 className='font-medium text-lg'>{job?.company?.name || 'Company'}</h1>
+                                                    <p className='text-sm text-gray-500'>{job?.location || 'India'}</p>
+                                                </div>
+                                            </div>
+
                                             <div>
-                                                <h1 className='font-medium text-lg'>{job?.company?.name}</h1>
-                                                <p className='text-sm text-gray-500'>India</p>
+                                                <h1 className='font-bold text-lg my-2'>{job?.title}</h1>
+                                                <p className='text-sm text-gray-600'>{job?.description}</p>
+                                            </div>
+                                            <div className='flex items-center gap-2 mt-4'>
+                                                <Badge className={'text-blue-700 font-bold'} variant="ghost">{job?.position} Positions</Badge>
+                                                <Badge className={'text-[#F83002] font-bold'} variant="ghost">{job?.jobType}</Badge>
+                                                <Badge className={'text-[#7209b7] font-bold'} variant="ghost">{job?.salary}LPA</Badge>
+                                            </div>
+                                            <div className='flex items-center gap-4 mt-4'>
+                                                <Button onClick={() => navigate(`/description/${job?._id}`)} variant="outline">Details</Button>
+                                                <Button 
+                                                    className="bg-red-600 hover:bg-red-700" 
+                                                    onClick={() => handleUnsaveJob(job._id)}
+                                                >
+                                                    Remove
+                                                </Button>
                                             </div>
                                         </div>
-
-                                        <div>
-                                            <h1 className='font-bold text-lg my-2'>{job?.title}</h1>
-                                            <p className='text-sm text-gray-600'>{job?.description}</p>
-                                        </div>
-                                        <div className='flex items-center gap-2 mt-4'>
-                                            <Badge className={'text-blue-700 font-bold'} variant="ghost">{job?.position} Positions</Badge>
-                                            <Badge className={'text-[#F83002] font-bold'} variant="ghost">{job?.jobType}</Badge>
-                                            <Badge className={'text-[#7209b7] font-bold'} variant="ghost">{job?.salary}LPA</Badge>
-                                        </div>
-                                        <div className='flex items-center gap-4 mt-4'>
-                                            <Button onClick={() => navigate(`/description/${job?._id}`)} variant="outline">Details</Button>
-                                            <Button 
-                                                className="bg-red-600 hover:bg-red-700" 
-                                                onClick={() => handleUnsaveJob(job._id)}
-                                            >
-                                                Remove
-                                            </Button>
-                                        </div>
-                                    </div>
-                                ))
+                                    );
+                                })
                             }
                         </div>
                     )

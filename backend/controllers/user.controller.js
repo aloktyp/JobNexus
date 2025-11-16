@@ -103,7 +103,12 @@ export const login = async (req, res) => {
             savedJobs: user.savedJobs || []
         }
 
-        return res.status(200).cookie("token", token, { maxAge: 1 * 24 * 60 * 60 * 1000, httpsOnly: true, sameSite: 'strict' }).json({
+        return res.status(200).cookie("token", token, { 
+            maxAge: 1 * 24 * 60 * 60 * 1000, 
+            httpOnly: true, 
+            secure: process.env.NODE_ENV === 'production',
+            sameSite: process.env.NODE_ENV === 'production' ? 'none' : 'strict'
+        }).json({
             message: `Welcome back ${user.fullname}`,
             user,
             success: true
@@ -114,7 +119,12 @@ export const login = async (req, res) => {
 }
 export const logout = async (req, res) => {
     try {
-        return res.status(200).cookie("token", "", { maxAge: 0 }).json({
+        return res.status(200).cookie("token", "", { 
+            maxAge: 0,
+            httpOnly: true,
+            secure: process.env.NODE_ENV === 'production',
+            sameSite: process.env.NODE_ENV === 'production' ? 'none' : 'strict'
+        }).json({
             message: "Logged out successfully.",
             success: true
         })
@@ -278,8 +288,17 @@ export const getSavedJobs = async (req, res) => {
             });
         }
 
+        // Filter out any null or undefined jobs (in case jobs were deleted)
+        const validSavedJobs = user.savedJobs.filter(job => job !== null && job !== undefined);
+
+        // If there were invalid jobs, clean up the user's savedJobs array
+        if (validSavedJobs.length !== user.savedJobs.length) {
+            user.savedJobs = validSavedJobs.map(job => job._id);
+            await user.save();
+        }
+
         return res.status(200).json({
-            savedJobs: user.savedJobs,
+            savedJobs: validSavedJobs,
             success: true
         });
     } catch (error) {

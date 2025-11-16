@@ -111,6 +111,7 @@ export const login = async (req, res) => {
         }).json({
             message: `Welcome back ${user.fullname}`,
             user,
+            token, // Also send token in response for localStorage fallback
             success: true
         })
     } catch (error) {

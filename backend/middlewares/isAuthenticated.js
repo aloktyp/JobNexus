@@ -2,9 +2,20 @@ import jwt from "jsonwebtoken";
 
 const isAuthenticated = async (req, res, next) => {
     try {
-        const token = req.cookies.token;
+        // Try to get token from cookies first, then from Authorization header
+        let token = req.cookies.token;
         
         if (!token) {
+            const authHeader = req.headers.authorization;
+            if (authHeader && authHeader.startsWith('Bearer ')) {
+                token = authHeader.substring(7);
+            }
+        }
+        
+        if (!token) {
+            console.log("No token found in cookies or Authorization header");
+            console.log("Cookies:", req.cookies);
+            console.log("Authorization header:", req.headers.authorization);
             return res.status(401).json({
                 message: "User not authenticated - No token provided",
                 success: false,

@@ -37,6 +37,10 @@ const Login = () => {
                 withCredentials: true,
             });
             if (res.data.success) {
+                // Store token in localStorage as fallback
+                if (res.data.token) {
+                    localStorage.setItem('token', res.data.token);
+                }
                 dispatch(setUser(res.data.user));
                 navigate("/");
                 toast.success(res.data.message);
